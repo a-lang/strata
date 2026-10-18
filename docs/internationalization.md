@@ -102,11 +102,6 @@ dates and durations put no space between digits and Han: "2026年9月7日",
 "1小時2分", "2分5秒", and "45秒". Key names, unit symbols, and product names
 stay as in English.
 
-Because Chinese and Japanese share Han code points whose regional glyph forms
-Pango chooses from the text language, Traditional Chinese needs a font with
-Traditional glyphs, such as Noto Sans CJK TC, and `PANGO_LANGUAGE=zh-tw` on a
-non-Chinese locale to select Traditional forms (see the font note below).
-
 Translate each string exactly once. The shared modal builders (`modal_layout`,
 `message_dialog_layout`) display their title, subtitle, and confirm label as given,
 so callers pass translated text. Do not pre-wrap dialog text:
@@ -208,12 +203,10 @@ forms Pango chooses from the text language. GTK takes that language from the
 process locale (`LC_CTYPE`), not from Strata's language setting. If the locale is
 neither Chinese nor Japanese, Pango uses the first Chinese or Japanese entry in
 `PANGO_LANGUAGE` (or `LANGUAGE` when that is unset); without one, the forms are
-the defaults of whichever CJK font Fontconfig picks. A manual 简体中文 choice can
-therefore show Japanese, Korean, or Traditional forms, and auto-detected Chinese
-on a `zh_TW` or `zh_HK` locale uses that region's forms. To see Simplified forms
-on a locale that is neither Chinese nor Japanese, run Strata with
-`PANGO_LANGUAGE=zh-cn`; for Traditional forms on a non-Chinese locale, use
-`PANGO_LANGUAGE=zh-tw`. Strata does not download or install fonts. A minimal
+the defaults of whichever CJK font Fontconfig picks. A manual 简体中文 or 正體中文
+choice can therefore show another region's forms. To see Simplified or
+Traditional forms on a locale that is neither Chinese nor Japanese, run Strata
+with `PANGO_LANGUAGE=zh-cn` or `PANGO_LANGUAGE=zh-tw`. Strata does not download or install fonts. A minimal
 container without CJK fonts can expose correct accessible text while rendering
 missing-glyph boxes; check actual rendering with suitable fonts installed, rather
 than relying only on accessibility tests.
