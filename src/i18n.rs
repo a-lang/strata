@@ -91,10 +91,8 @@ fn supported_locale(value: &str) -> Option<&'static str> {
         "it" => Some("it"),
         "ru" => Some("ru"),
         "zh" => match value.split('-').nth(1) {
-            Some("hant") | Some("tw") | Some("hk") | Some("mo") => Some("zh-TW"),
-            Some("hans") | Some("cn") | Some("sg") => Some("zh-CN"),
-            None => Some("zh-CN"),
-            _ => None,
+            Some("hant" | "tw" | "hk" | "mo") => Some("zh-TW"),
+            _ => Some("zh-CN"),
         },
         _ => None,
     }

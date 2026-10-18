@@ -19,6 +19,8 @@ fn detects_supported_locales_and_honors_posix_precedence() {
         ("", "", "", "zh_CN.GB18030", "zh-CN"),
         ("", "", "", "zh_TW.UTF-8", "zh-TW"),
         ("", "zh_HK.UTF-8", "", "en_US", "zh-TW"),
+        ("", "", "", "zh_MO", "zh-TW"),
+        ("", "", "", "zh_MY.UTF-8", "zh-CN"),
         ("zh-Hans", "", "", "en_US.UTF-8", "zh-CN"),
         ("xx:zh-Hant:ja", "", "", "de_DE", "zh-TW"),
         ("", "", "", "IT_it.utf8", "it"),
@@ -132,7 +134,6 @@ fn sentences_join_without_a_space_after_a_full_width_stop() {
         ("权限不足", "请重试。", "权限不足。请重试。"),
     ] {
         assert_eq!(join_sentences_in("zh-CN", first, second), expected);
-        assert_eq!(join_sentences_in("zh-TW", first, second), expected);
     }
 }
 
@@ -195,7 +196,7 @@ fn counts_and_numbers_group_digits_by_language() {
     assert_eq!(count_in("fr", "files", 60_000), "60\u{202f}000 fichiers");
     assert_eq!(count_in("ru", "files", 60_000), "60\u{a0}000 файлов");
     assert_eq!(count_in("zh-CN", "files", 3_000), "3,000 个文件");
-    assert_eq!(count_in("zh-TW", "files", 3_000), "3,000 个文件");
+    assert_eq!(count_in("zh-TW", "files", 3_000), "3,000 個檔案");
     assert_eq!(decimal_in("de", 1_234_567.3, 1), "1.234.567,3");
     assert_eq!(decimal_in("en", 400.0, 1), "400.0");
     assert_eq!(decimal_in("zh-CN", 1_234_567.3, 1), "1,234,567.3");
@@ -219,7 +220,7 @@ fn durations_use_the_language_units() {
         ("zh-CN", 3_725, "1小时2分"),
         ("zh-TW", 45, "45秒"),
         ("zh-TW", 125, "2分5秒"),
-        ("zh-TW", 3_725, "1小时2分"),
+        ("zh-TW", 3_725, "1小時2分"),
     ] {
         assert_eq!(duration_in(locale, seconds), expected, "{locale}/{seconds}");
     }

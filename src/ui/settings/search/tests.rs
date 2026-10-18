@@ -65,11 +65,9 @@ fn localized_setting_titles_keep_stable_search_targets() {
                 );
             }
             rust_i18n::set_locale("zh-TW");
-            // The titles are 顯示「F1 快捷鍵」按鈕 and Omarchy 變體.
-            for (query, id) in [
-                ("快捷鍵按鈕", "hints"),
-                ("Omarchy變體", "omarchy-variant"),
-            ] {
+            // The titles are 顯示 F1 快捷鍵按鈕 and Omarchy 變體.
+            for (query, id) in [("快捷鍵按鈕", "hints"), ("Omarchy變體", "omarchy-variant")]
+            {
                 assert!(
                     find_matches(&normalized(query)).ids.contains(id),
                     "zh-TW: {query}"
